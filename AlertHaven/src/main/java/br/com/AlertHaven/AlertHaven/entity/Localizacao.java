@@ -3,10 +3,12 @@ package br.com.AlertHaven.AlertHaven.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "TB_localizacao")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Localizacao {
