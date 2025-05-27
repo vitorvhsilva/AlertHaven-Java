@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "TB_TIPO_EMERGENCIA")
 @Data
@@ -19,4 +21,8 @@ public class TipoEmergencia {
 
     @Column(name = "tipo_emergencia")
     private String tipoEmergencia;
+
+
+    @ManyToMany(mappedBy = "tipoEmergencias", cascade = CascadeType.ALL)
+    private List<Abrigo> abrigos;
 }

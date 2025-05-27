@@ -1,9 +1,7 @@
 package br.com.AlertHaven.AlertHaven.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +22,8 @@ public class Localizacao {
 
     @Column(name = "rua_abrigo")
     private String ruaAbrigo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_abrigo")
+    private Abrigo abrigo;
 }
