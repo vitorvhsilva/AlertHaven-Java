@@ -6,6 +6,8 @@ import br.com.AlertHaven.AlertHaven.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -14,7 +16,10 @@ public class UsuarioService {
 
     private UsuarioRepository repository;
 
-    public Usuario cadastrarUsuario(Usuario usuario) {
+    public Usuario cadastrarUsuario(Usuario usuario, LocalDate dataNascimento) {
+        usuario.setDataNascimento(dataNascimento);
+        usuario.setDataCriacaoUsuario(LocalDateTime.now());
+
         return repository.save(usuario);
     }
 

@@ -1,8 +1,10 @@
 package br.com.AlertHaven.AlertHaven.service;
 
+import br.com.AlertHaven.AlertHaven.dto.request.AtualizarAbrigoRequestDto;
 import br.com.AlertHaven.AlertHaven.entity.Abrigo;
 import br.com.AlertHaven.AlertHaven.exception.AbrigoNaoEncontradoException;
 import br.com.AlertHaven.AlertHaven.repository.AbrigoRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,17 @@ public class AbrigoService {
 
     public void deletarAbrigoPorId(String id) {
         repository.deleteById(id);
+    }
+
+    @Transactional
+    public Abrigo atualizarAbrigo(String id, AtualizarAbrigoRequestDto dto) {
+        Abrigo abrigo = obterAbrigoPorId(id);
+
+        abrigo.setNomeAbrigo(dto.getNomeAbrigo());
+        abrigo.setEmailAbrigo(dto.getEmailAbrigo());
+        abrigo.setCapacidadeSuportadaAbrigo(dto.getCapacidadeSuportadaAbrigo());
+
+        return abrigo;
     }
 
 }
