@@ -13,6 +13,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Localizacao {
 
+    @Id
+    @Column(name = "id_localizacao")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String idLocalizacao;
+
     @Column(name = "identificacao_unica_abrigo")
     private String identificacaoUnicaAbrigo;
 
