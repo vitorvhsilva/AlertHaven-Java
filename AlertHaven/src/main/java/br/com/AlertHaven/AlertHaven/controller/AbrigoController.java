@@ -1,7 +1,7 @@
 package br.com.AlertHaven.AlertHaven.controller;
 
 import br.com.AlertHaven.AlertHaven.dto.request.AtualizarAbrigoRequestDto;
-import br.com.AlertHaven.AlertHaven.dto.request.ObterAbrigoRequestDto;
+import br.com.AlertHaven.AlertHaven.dto.request.CadastrarAbrigoRequestDto;
 import br.com.AlertHaven.AlertHaven.dto.response.ObterAbrigoResponseDto;
 import br.com.AlertHaven.AlertHaven.entity.Abrigo;
 import br.com.AlertHaven.AlertHaven.service.AbrigoService;
@@ -23,7 +23,7 @@ public class AbrigoController {
     private ModelMapper mapper;
 
     @PostMapping
-    public ResponseEntity<ObterAbrigoResponseDto> cadastrarAbrigo(@RequestBody ObterAbrigoRequestDto dto) {
+    public ResponseEntity<ObterAbrigoResponseDto> cadastrarAbrigo(@RequestBody CadastrarAbrigoRequestDto dto) {
         Abrigo abrigo = mapper.map(dto, Abrigo.class);
         Abrigo abrigoCadastrado = abrigoService.cadastrarAbrigo(abrigo);
 

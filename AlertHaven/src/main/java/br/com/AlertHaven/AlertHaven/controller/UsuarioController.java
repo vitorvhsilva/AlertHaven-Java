@@ -1,10 +1,9 @@
 package br.com.AlertHaven.AlertHaven.controller;
 
 import br.com.AlertHaven.AlertHaven.dto.request.AtualizarUsuarioRequestDto;
-import br.com.AlertHaven.AlertHaven.dto.request.ObterUsuarioRequestDto;
+import br.com.AlertHaven.AlertHaven.dto.request.CadastrarUsuarioRequestDto;
 import br.com.AlertHaven.AlertHaven.dto.response.ObterUsuarioResponseDto;
 import br.com.AlertHaven.AlertHaven.entity.Usuario;
-import br.com.AlertHaven.AlertHaven.repository.UsuarioRepository;
 import br.com.AlertHaven.AlertHaven.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -23,7 +22,7 @@ public class UsuarioController {
     private ModelMapper mapper;
 
     @PostMapping
-    public ResponseEntity<ObterUsuarioResponseDto>cadastrarUsuario(@RequestBody ObterUsuarioRequestDto dto) {
+    public ResponseEntity<ObterUsuarioResponseDto>cadastrarUsuario(@RequestBody CadastrarUsuarioRequestDto dto) {
         Usuario usuario = mapper.map(dto, Usuario.class);
         LocalDate dataNasc = LocalDate.of(dto.getAno(), dto.getMes(), dto.getDia());
 
