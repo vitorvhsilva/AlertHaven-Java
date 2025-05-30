@@ -33,4 +33,5 @@ public class Localizacao {
     @ManyToOne
     @JoinColumn(name = "id_abrigo")
     private Abrigo abrigo;
+
 }

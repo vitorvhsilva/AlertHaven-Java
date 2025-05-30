@@ -5,6 +5,7 @@ import br.com.AlertHaven.AlertHaven.entity.Usuario;
 import br.com.AlertHaven.AlertHaven.exception.UsuarioNaoEncontradoException;
 import br.com.AlertHaven.AlertHaven.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public Usuario atualizarUsuario(String id, AtualizarUsuarioRequestDto dto) {
+    public Usuario atualizarUsuario(String id, @Valid AtualizarUsuarioRequestDto dto) {
         Usuario usuario = obterUsuarioPorId(id);
 
         usuario.setNomeUsuario(dto.getNomeUsuario());

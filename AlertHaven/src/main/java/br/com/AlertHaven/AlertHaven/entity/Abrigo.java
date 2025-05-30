@@ -28,8 +28,8 @@ public class Abrigo {
     @Column(name = "email_abrigo", nullable = false, length = 50)
     private String emailAbrigo;
 
-    @OneToMany(mappedBy = "abrigo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Localizacao> localizacoes;
+    @OneToOne(mappedBy = "abrigo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Localizacao localizacao;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "TB_ABRIGO_TIPO_EMERGENCIA",

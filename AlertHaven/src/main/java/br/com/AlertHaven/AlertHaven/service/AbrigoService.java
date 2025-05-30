@@ -5,6 +5,7 @@ import br.com.AlertHaven.AlertHaven.entity.Abrigo;
 import br.com.AlertHaven.AlertHaven.exception.AbrigoNaoEncontradoException;
 import br.com.AlertHaven.AlertHaven.repository.AbrigoRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class AbrigoService {
     }
 
     @Transactional
-    public Abrigo atualizarAbrigo(String id, AtualizarAbrigoRequestDto dto) {
+    public Abrigo atualizarAbrigo(String id, @Valid AtualizarAbrigoRequestDto dto) {
         Abrigo abrigo = obterAbrigoPorId(id);
 
         abrigo.setNomeAbrigo(dto.getNomeAbrigo());

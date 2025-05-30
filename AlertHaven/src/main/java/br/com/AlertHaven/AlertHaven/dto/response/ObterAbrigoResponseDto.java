@@ -9,4 +9,5 @@ public class ObterAbrigoResponseDto {
     private String nomeAbrigo;
     private String capacidadeSuportadaAbrigo;
     private String emailAbrigo;
+    private LocalizacaoDto localizacao;
 }
