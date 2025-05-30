@@ -46,5 +46,7 @@ public class UsuarioService {
         usuario.setSenhaUsuario(dto.getSenhaUsuario());
         usuario.setCpfUsuario(dto.getCpfUsuario());
         usuario.setTelefoneUsuario(dto.getTelefoneUsuario());
+
+        return usuario;
     }
 }
