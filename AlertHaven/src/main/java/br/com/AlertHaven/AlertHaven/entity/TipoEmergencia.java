@@ -16,8 +16,8 @@ public class TipoEmergencia {
 
     @Id
     @Column(name = "id_tipo_emergencia")
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String idTipoEmergencia;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idTipoEmergencia;
 
     @Column(name = "tipo_emergencia")
     private String tipoEmergencia;

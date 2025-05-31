@@ -48,7 +48,7 @@ public class AbrigoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ObterAbrigoResponseDto> listarAbrigoPorId(@PathVariable String id) {
+    public ResponseEntity<ObterAbrigoResponseDto> obterAbrigoPorId(@PathVariable String id) {
         Abrigo abrigo = abrigoService.obterAbrigoPorId(id);
 
         LocalizacaoDto localizacaoDto = mapper.map(abrigo.getLocalizacao(), LocalizacaoDto.class);
