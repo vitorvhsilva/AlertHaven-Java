@@ -41,7 +41,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ObterUsuarioResponseDTO> listarUsuarioPorId(@PathVariable String id){
+    public ResponseEntity<ObterUsuarioResponseDTO> listarUsuarioPorId(@PathVariable("id") String id){
         Usuario usuario = service.obterUsuarioPorId(id);
 
         ObterUsuarioResponseDTO responseDto = mapper.map(usuario, ObterUsuarioResponseDTO.class);
@@ -50,14 +50,14 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ObterUsuarioResponseDTO> atualizarUsuario(@PathVariable String id, @Valid @RequestBody AtualizarUsuarioRequestDTO dto) {
+    public ResponseEntity<ObterUsuarioResponseDTO> atualizarUsuario(@PathVariable("id") String id, @Valid @RequestBody AtualizarUsuarioRequestDTO dto) {
         Usuario usuario = service.atualizarUsuario(id, dto);
 
         return ResponseEntity.ok(mapper.map(usuario, ObterUsuarioResponseDTO.class));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarUsuario(@PathVariable String id) {
+    public ResponseEntity<Void> deletarUsuario(@PathVariable("id") String id) {
         service.deletarUsuarioPorId(id);
 
         return ResponseEntity.notFound().build();
