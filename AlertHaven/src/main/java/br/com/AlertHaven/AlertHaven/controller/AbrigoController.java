@@ -55,10 +55,10 @@ public class AbrigoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ObterAbrigoSimplesResponseDTO> atualizarAbrigo(@PathVariable String id, @Valid @RequestBody AtualizarAbrigoRequestDTO dto) {
+    public ResponseEntity<ObterAbrigoCompletoResponseDTO> atualizarAbrigo(@PathVariable String id, @Valid @RequestBody AtualizarAbrigoRequestDTO dto) {
         Abrigo abrigo = abrigoService.atualizarAbrigo(id, dto);
 
-        return ResponseEntity.ok(mapper.map(abrigo, ObterAbrigoSimplesResponseDTO.class));
+        return ResponseEntity.ok(converterEntidadeParaDTOCompleto(abrigo));
     }
 
     @DeleteMapping("/{id}")
