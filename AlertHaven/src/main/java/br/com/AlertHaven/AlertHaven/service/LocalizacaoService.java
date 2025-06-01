@@ -17,7 +17,8 @@ public class LocalizacaoService {
 
         EnderecoViaCep viaCep = cepClient.obterEnderecoAbrigo(cep);
 
-        Localizacao localizacao = new Localizacao(null, cep, "", "", "", abrigo);
+        Localizacao localizacao = new Localizacao(null, cep, "", "",
+                viaCep.getLogradouro(), abrigo);
 
         abrigo.setLocalizacao(localizacao);
         return repository.save(localizacao);

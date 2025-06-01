@@ -2,10 +2,12 @@ package br.com.AlertHaven.AlertHaven.controller;
 
 import br.com.AlertHaven.AlertHaven.dto.request.AtualizarAbrigoRequestDTO;
 import br.com.AlertHaven.AlertHaven.dto.request.CadastrarAbrigoRequestDTO;
-import br.com.AlertHaven.AlertHaven.dto.response.LocalizacaoDto;
-import br.com.AlertHaven.AlertHaven.dto.response.ObterAbrigoResponseDTO;
+import br.com.AlertHaven.AlertHaven.dto.response.LocalizacaoDTO;
+import br.com.AlertHaven.AlertHaven.dto.response.ObterAbrigoCompletoResponseDTO;
+import br.com.AlertHaven.AlertHaven.dto.response.ObterAbrigoSimplesResponseDTO;
 import br.com.AlertHaven.AlertHaven.entity.Abrigo;
 import br.com.AlertHaven.AlertHaven.entity.Localizacao;
+import br.com.AlertHaven.AlertHaven.entity.TipoEmergencia;
 import br.com.AlertHaven.AlertHaven.service.AbrigoService;
 import br.com.AlertHaven.AlertHaven.service.LocalizacaoService;
 import jakarta.validation.Valid;
@@ -27,42 +29,36 @@ public class AbrigoController {
     private LocalizacaoService localizacaoService;
 
     @PostMapping
-    public ResponseEntity<ObterAbrigoResponseDTO> cadastrarAbrigo(@RequestBody CadastrarAbrigoRequestDTO dto) {
+    public ResponseEntity<ObterAbrigoCompletoResponseDTO> cadastrarAbrigo(@RequestBody CadastrarAbrigoRequestDTO dto) {
         Abrigo abrigo = mapper.map(dto, Abrigo.class);
         Abrigo abrigoCadastrado = abrigoService.cadastrarAbrigo(abrigo, dto.getIdsTipoEmergencia());
         Localizacao localizacao = localizacaoService.persistirLocalizacao(dto.getCep(), abrigoCadastrado);
+        abrigoCadastrado.setLocalizacao(localizacao);
 
-        ObterAbrigoResponseDTO responseDto = mapper.map(abrigoCadastrado, ObterAbrigoResponseDTO.class);
-        responseDto.setLocalizacao(mapper.map(localizacao, LocalizacaoDto.class));
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(converterEntidadeParaDTOCompleto(abrigoCadastrado));
     }
 
     @GetMapping
-    public List<ObterAbrigoResponseDTO> listarAbrigos(){
+    public List<ObterAbrigoSimplesResponseDTO> listarAbrigos(){
         List<Abrigo> abrigos = abrigoService.listarAbrigos();
         return abrigos.stream()
-                .map(abrigo -> mapper.map(abrigo, ObterAbrigoResponseDTO.class))
+                .map(abrigo -> mapper.map(abrigo, ObterAbrigoSimplesResponseDTO.class))
                 .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ObterAbrigoResponseDTO> obterAbrigoPorId(@PathVariable String id) {
+    public ResponseEntity<ObterAbrigoCompletoResponseDTO> obterAbrigoPorId(@PathVariable String id) {
         Abrigo abrigo = abrigoService.obterAbrigoPorId(id);
 
-        LocalizacaoDto localizacaoDto = mapper.map(abrigo.getLocalizacao(), LocalizacaoDto.class);
-
-        ObterAbrigoResponseDTO response = mapper.map(abrigo, ObterAbrigoResponseDTO.class);
-        response.setLocalizacao(localizacaoDto);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(converterEntidadeParaDTOCompleto(abrigo));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ObterAbrigoResponseDTO> atualizarAbrigo(@PathVariable String id, @Valid @RequestBody AtualizarAbrigoRequestDTO dto) {
+    public ResponseEntity<ObterAbrigoSimplesResponseDTO> atualizarAbrigo(@PathVariable String id, @Valid @RequestBody AtualizarAbrigoRequestDTO dto) {
         Abrigo abrigo = abrigoService.atualizarAbrigo(id, dto);
 
-        return ResponseEntity.ok(mapper.map(abrigo, ObterAbrigoResponseDTO.class));
+        return ResponseEntity.ok(mapper.map(abrigo, ObterAbrigoSimplesResponseDTO.class));
     }
 
     @DeleteMapping("/{id}")
@@ -70,5 +66,15 @@ public class AbrigoController {
         abrigoService.deletarAbrigoPorId(id);
 
         return ResponseEntity.notFound().build();
+    }
+
+    private ObterAbrigoCompletoResponseDTO converterEntidadeParaDTOCompleto(Abrigo abrigo) {
+        ObterAbrigoCompletoResponseDTO response = mapper.map(abrigo, ObterAbrigoCompletoResponseDTO.class);
+        response.setLocalizacao(mapper.map(abrigo.getLocalizacao(), LocalizacaoDTO.class));
+        response.setTiposEmergencias(abrigo.getTipoEmergencias().stream()
+                .map(TipoEmergencia::getTipoEmergencia)
+                .toList());
+
+        return response;
     }
 }
