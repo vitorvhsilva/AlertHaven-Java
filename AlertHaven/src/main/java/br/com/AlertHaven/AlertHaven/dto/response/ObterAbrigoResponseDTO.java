@@ -3,7 +3,7 @@ package br.com.AlertHaven.AlertHaven.dto.response;
 import lombok.Data;
 
 @Data
-public class ObterAbrigoResponseDto {
+public class ObterAbrigoResponseDTO {
 
     private String idAbrigo;
     private String nomeAbrigo;

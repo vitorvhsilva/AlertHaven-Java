@@ -1,6 +1,6 @@
 package br.com.AlertHaven.AlertHaven.service;
 
-import br.com.AlertHaven.AlertHaven.dto.request.AtualizarUsuarioRequestDto;
+import br.com.AlertHaven.AlertHaven.dto.request.AtualizarUsuarioRequestDTO;
 import br.com.AlertHaven.AlertHaven.entity.Usuario;
 import br.com.AlertHaven.AlertHaven.exception.UsuarioNaoEncontradoException;
 import br.com.AlertHaven.AlertHaven.repository.UsuarioRepository;
@@ -39,7 +39,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public Usuario atualizarUsuario(String id, @Valid AtualizarUsuarioRequestDto dto) {
+    public Usuario atualizarUsuario(String id, @Valid AtualizarUsuarioRequestDTO dto) {
         Usuario usuario = obterUsuarioPorId(id);
 
         usuario.setNomeUsuario(dto.getNomeUsuario());

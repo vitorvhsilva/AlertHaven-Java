@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class AtualizarAbrigoResponseDto {
+public class AtualizarAbrigoResponseDTO {
     @NotBlank(message = "O nome do abrigo não pode ficar em branco")
     private String nomeAbrigo;
 

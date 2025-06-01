@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class AtualizarUsuarioRequestDto {
+public class AtualizarUsuarioRequestDTO {
     @NotBlank(message = "O nome do usuário não pode ficar em branco")
     private String nomeUsuario;
 

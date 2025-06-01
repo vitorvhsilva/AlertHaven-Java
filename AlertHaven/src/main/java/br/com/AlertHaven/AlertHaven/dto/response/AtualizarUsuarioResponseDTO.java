@@ -2,17 +2,12 @@ package br.com.AlertHaven.AlertHaven.dto.response;
 
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Data
-public class ObterUsuarioResponseDto {
-    private String idUsuario;
+public class AtualizarUsuarioResponseDTO {
     private String nomeUsuario;
     private String emailUsuario;
     private String senhaUsuario;
     private String cpfUsuario;
     private String telefoneUsuario;
-    private LocalDate dataNascimento;
-    private LocalDateTime dataCriacaoUsuario;
+    private String dataNascimento;
 }

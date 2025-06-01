@@ -1,8 +1,8 @@
 package br.com.AlertHaven.AlertHaven.controller;
 
-import br.com.AlertHaven.AlertHaven.dto.request.AtualizarUsuarioRequestDto;
-import br.com.AlertHaven.AlertHaven.dto.request.CadastrarUsuarioRequestDto;
-import br.com.AlertHaven.AlertHaven.dto.response.ObterUsuarioResponseDto;
+import br.com.AlertHaven.AlertHaven.dto.request.AtualizarUsuarioRequestDTO;
+import br.com.AlertHaven.AlertHaven.dto.request.CadastrarUsuarioRequestDTO;
+import br.com.AlertHaven.AlertHaven.dto.response.ObterUsuarioResponseDTO;
 import br.com.AlertHaven.AlertHaven.entity.Usuario;
 import br.com.AlertHaven.AlertHaven.service.UsuarioService;
 import jakarta.validation.Valid;
@@ -22,36 +22,36 @@ public class UsuarioController {
     private ModelMapper mapper;
 
     @PostMapping
-    public ResponseEntity<ObterUsuarioResponseDto>cadastrarUsuario(@RequestBody CadastrarUsuarioRequestDto dto) {
+    public ResponseEntity<ObterUsuarioResponseDTO>cadastrarUsuario(@RequestBody CadastrarUsuarioRequestDTO dto) {
         Usuario usuario = mapper.map(dto, Usuario.class);
         LocalDate dataNasc = LocalDate.of(dto.getAno(), dto.getMes(), dto.getDia());
 
-        ObterUsuarioResponseDto responseDto = mapper.map(service.cadastrarUsuario(usuario, dataNasc), ObterUsuarioResponseDto.class);
+        ObterUsuarioResponseDTO responseDto = mapper.map(service.cadastrarUsuario(usuario, dataNasc), ObterUsuarioResponseDTO.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     @GetMapping
-    public List<ObterUsuarioResponseDto> listarUsuarios() {
+    public List<ObterUsuarioResponseDTO> listarUsuarios() {
         List<Usuario> usuarios = service.listarUsuarios();
         return usuarios.stream()
-                .map(usuario -> mapper.map(usuario, ObterUsuarioResponseDto.class))
+                .map(usuario -> mapper.map(usuario, ObterUsuarioResponseDTO.class))
                 .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ObterUsuarioResponseDto> listarUsuarioPorId(@PathVariable String id){
+    public ResponseEntity<ObterUsuarioResponseDTO> listarUsuarioPorId(@PathVariable String id){
         Usuario usuario = service.obterUsuarioPorId(id);
 
-        ObterUsuarioResponseDto responseDto = mapper.map(usuario, ObterUsuarioResponseDto.class);
+        ObterUsuarioResponseDTO responseDto = mapper.map(usuario, ObterUsuarioResponseDTO.class);
 
         return ResponseEntity.ok(responseDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ObterUsuarioResponseDto> atualizarUsuario(@PathVariable String id, @Valid @RequestBody AtualizarUsuarioRequestDto dto) {
+    public ResponseEntity<ObterUsuarioResponseDTO> atualizarUsuario(@PathVariable String id, @Valid @RequestBody AtualizarUsuarioRequestDTO dto) {
         Usuario usuario = service.atualizarUsuario(id, dto);
 
-        return ResponseEntity.ok(mapper.map(usuario, ObterUsuarioResponseDto.class));
+        return ResponseEntity.ok(mapper.map(usuario, ObterUsuarioResponseDTO.class));
     }
 
     @DeleteMapping("/{id}")
