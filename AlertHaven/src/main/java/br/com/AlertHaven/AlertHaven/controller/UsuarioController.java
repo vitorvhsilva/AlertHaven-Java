@@ -6,6 +6,7 @@ import br.com.AlertHaven.AlertHaven.dto.response.ObterUsuarioResponseDTO;
 import br.com.AlertHaven.AlertHaven.entity.Usuario;
 import br.com.AlertHaven.AlertHaven.service.UsuarioService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
+@AllArgsConstructor
 public class UsuarioController {
 
     private UsuarioService service;
