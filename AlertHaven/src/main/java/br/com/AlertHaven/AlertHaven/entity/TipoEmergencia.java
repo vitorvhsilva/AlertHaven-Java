@@ -23,6 +23,6 @@ public class TipoEmergencia {
     private String tipoEmergencia;
 
 
-    @ManyToMany(mappedBy = "tipoEmergencias", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "tipoEmergencias", cascade = CascadeType.PERSIST)
     private List<Abrigo> abrigos;
 }

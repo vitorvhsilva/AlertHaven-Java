@@ -31,7 +31,7 @@ public class Abrigo {
     @OneToOne(mappedBy = "abrigo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Localizacao localizacao;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "TB_ABRIGO_TIPO_EMERGENCIA",
             joinColumns = @JoinColumn(name = "id_abrigo"),
             inverseJoinColumns = @JoinColumn(name = "id_tipo_emergencia")

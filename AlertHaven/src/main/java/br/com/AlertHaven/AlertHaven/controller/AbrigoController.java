@@ -62,10 +62,10 @@ public class AbrigoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarAbrigo(@PathVariable String id){
+    public ResponseEntity<Void> deletarAbrigo(@PathVariable("id") String id){
         abrigoService.deletarAbrigoPorId(id);
 
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
     private ObterAbrigoCompletoResponseDTO converterEntidadeParaDTOCompleto(Abrigo abrigo) {
