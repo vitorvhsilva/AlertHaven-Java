@@ -60,7 +60,7 @@ public class UsuarioController {
     public ResponseEntity<Void> deletarUsuario(@PathVariable("id") String id) {
         service.deletarUsuarioPorId(id);
 
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
 }

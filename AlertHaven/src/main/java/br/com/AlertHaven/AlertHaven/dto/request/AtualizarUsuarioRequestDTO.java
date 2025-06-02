@@ -1,6 +1,7 @@
 package br.com.AlertHaven.AlertHaven.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -22,12 +23,12 @@ public class AtualizarUsuarioRequestDTO {
     @NotBlank(message = "O telefone do usuário não pode ficar em branco")
     private String telefoneUsuario;
 
-    @NotBlank(message = "O dia de nascimento do usuário não pode ficar em branco")
+    @NotNull(message = "O dia de nascimento do usuário não pode ficar em branco")
     private int dia;
 
-    @NotBlank(message = "O mes de nascimento do usuário não pode ficar em branco")
+    @NotNull(message = "O mes de nascimento do usuário não pode ficar em branco")
     private int mes;
 
-    @NotBlank(message = "O ano de nascimento do usuário não pode ficar em branco")
+    @NotNull(message = "O ano de nascimento do usuário não pode ficar em branco")
     private int ano;
 }
