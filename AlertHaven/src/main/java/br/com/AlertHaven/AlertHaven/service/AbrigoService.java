@@ -4,6 +4,7 @@ import br.com.AlertHaven.AlertHaven.dto.request.AtualizarAbrigoRequestDTO;
 import br.com.AlertHaven.AlertHaven.entity.Abrigo;
 import br.com.AlertHaven.AlertHaven.entity.TipoEmergencia;
 import br.com.AlertHaven.AlertHaven.exception.AbrigoNaoEncontradoException;
+import br.com.AlertHaven.AlertHaven.exception.TipoEmergenciaNaoEncontradoException;
 import br.com.AlertHaven.AlertHaven.repository.AbrigoRepository;
 import br.com.AlertHaven.AlertHaven.repository.TipoEmergenciaRepository;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,9 +23,10 @@ public class AbrigoService {
     private TipoEmergenciaRepository tipoEmergenciaRepository;
 
     public Abrigo cadastrarAbrigo(Abrigo abrigo, List<Integer> idsTipoEmergencia) {
+        abrigo.setTipoEmergencias(new ArrayList<>());
         idsTipoEmergencia.forEach(i -> {
             TipoEmergencia tipoEmergencia = tipoEmergenciaRepository.findById(i)
-                    .orElseThrow(() -> new AbrigoNaoEncontradoException("Tipo de Emergência não encontrado"));
+                    .orElseThrow(() -> new TipoEmergenciaNaoEncontradoException("Tipo de Emergência não encontrado"));
             abrigo.getTipoEmergencias().add(tipoEmergencia);
         });
         return abrigoRepository.save(abrigo);

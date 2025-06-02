@@ -5,9 +5,11 @@ import br.com.AlertHaven.AlertHaven.entity.Abrigo;
 import br.com.AlertHaven.AlertHaven.entity.Localizacao;
 import br.com.AlertHaven.AlertHaven.http.ViaCepClient;
 import br.com.AlertHaven.AlertHaven.repository.LocalizacaoRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class LocalizacaoService {
 
     private LocalizacaoRepository repository;
@@ -15,7 +17,14 @@ public class LocalizacaoService {
 
     public Localizacao persistirLocalizacao(String cep, Abrigo abrigo) {
 
-        EnderecoViaCep viaCep = cepClient.obterEnderecoAbrigo(cep);
+        EnderecoViaCep viaCep;
+
+        try {
+            viaCep = cepClient.obterEnderecoAbrigo(cep);
+        } catch (Exception e) {
+            viaCep = new EnderecoViaCep("", "", "", "", "", "", "",
+                    "", "", "", "", "", "");
+        }
 
         Localizacao localizacao = new Localizacao(null, cep, "", "",
                 viaCep.getLogradouro(), abrigo);
