@@ -28,7 +28,7 @@ public class Abrigo {
     @Column(name = "email_abrigo", nullable = false, length = 50)
     private String emailAbrigo;
 
-    @OneToOne(mappedBy = "abrigo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "abrigo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Localizacao localizacao;
 
     @ManyToMany(cascade = CascadeType.PERSIST)

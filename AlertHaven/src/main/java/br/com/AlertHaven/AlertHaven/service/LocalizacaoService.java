@@ -22,6 +22,7 @@ public class LocalizacaoService {
         try {
             viaCep = cepClient.obterEnderecoAbrigo(cep);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             viaCep = new EnderecoViaCep("", "", "", "", "", "", "",
                     "", "", "", "", "", "");
         }

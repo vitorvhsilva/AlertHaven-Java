@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "viacep-client", url = "https://viacep.com.br/ws")
 public interface ViaCepClient {
     @GetMapping("/{cep}/json")
-    EnderecoViaCep obterEnderecoAbrigo(@PathVariable String id);
+    EnderecoViaCep obterEnderecoAbrigo(@PathVariable("cep") String id);
 }
