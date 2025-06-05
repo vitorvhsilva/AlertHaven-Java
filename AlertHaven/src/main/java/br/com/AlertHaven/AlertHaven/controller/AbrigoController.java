@@ -118,42 +118,13 @@ public class AbrigoController {
                     )
             }
     )
-    @PutMapping("/completo/{id}")
-    public ResponseEntity<ObterAbrigoCompletoResponseDTO> atualizarAbrigoCompleto(
+    @PutMapping("/{id}")
+    public ResponseEntity<ObterAbrigoCompletoResponseDTO> atualizarAbrigo(
             @PathVariable String id,
             @Valid @RequestBody AtualizarAbrigoRequestDTO dto
     ) {
         Abrigo abrigo = abrigoService.atualizarAbrigo(id, dto);
         return ResponseEntity.ok(converterEntidadeParaDTOCompleto(abrigo));
-    }
-
-
-    @Operation(
-            summary = "Atualização simplificada de um abrigo existente",
-            description = "Atualiza apenas os dados básicos de um abrigo, retornando uma versão simplificada dos dados",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Abrigo atualizado com sucesso (versão simplificada)",
-                            content = @Content(schema = @Schema(implementation = ObterAbrigoSimplesResponseDTO.class))
-                    ),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "Dados inválidos fornecidos",
-                            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
-                    ),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "Abrigo não encontrado",
-                            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
-                    )
-            }
-    )
-    @PutMapping("/simples/{id}")
-    public ResponseEntity<ObterAbrigoSimplesResponseDTO> atualizarAbrigoSimples (@PathVariable String id, @Valid @RequestBody AtualizarAbrigoRequestDTO dto) {
-        Abrigo abrigo = abrigoService.atualizarAbrigo(id, dto);
-        ObterAbrigoSimplesResponseDTO responseDto = mapper.map(abrigo, ObterAbrigoSimplesResponseDTO.class);
-        return ResponseEntity.ok(responseDto);
     }
 
     @Operation(
