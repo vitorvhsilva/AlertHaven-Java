@@ -1,30 +1,29 @@
-# Use uma imagem base do Ubuntu para construção
-FROM ubuntu:latest AS build
-
-# Atualize o repositório e instale o JDK e Maven
-RUN apt-get update && apt-get install openjdk-17-jdk maven -y
-
-# Defina o diretório de trabalho para a construção
+# build maven
+FROM maven:3.9.9-eclipse-temurin-21 AS build
 WORKDIR /app
-
-# Copie o arquivo pom.xml e o código-fonte do projeto para o contêiner
 COPY pom.xml .
 COPY src ./src
+RUN mvn clean package -DskipTests -Dmaven.compiler.parameters=true
 
-# Execute a construção do Maven ignorando os testes
-RUN mvn clean install -DskipTests
+# build api
+FROM openjdk:21-jdk-slim
 
-# Use uma imagem base mais leve para executar o aplicativo
-FROM openjdk:17-jdk-slim
+# criando usuario nao-root
+ENV APP_USER=appuser \
+    APP_HOME=/opt/alert-haven \
+    APP_PORT=8080
 
-# Expor a porta 8080
-EXPOSE 8080
+RUN useradd -m -d ${APP_HOME} ${APP_USER} && \
+    chown ${APP_USER}:${APP_USER} ${APP_HOME}
 
-# Defina o diretório de trabalho
-WORKDIR /app
+# setando workdir
+WORKDIR ${APP_HOME}
+RUN chown ${APP_USER}:${APP_USER} ${APP_HOME}
 
-# Copie o arquivo JAR gerado para a imagem final
-COPY --from=build /app/target/brinquedos-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build --chown=${APP_USER}:${APP_USER} /app/target/AlertHaven-0.0.1-SNAPSHOT.jar ${APP_HOME}/app.jar
 
-# Comando para executar o aplicativo
-ENTRYPOINT ["java", "-jar", "app.jar"]
+USER ${APP_USER}
+
+EXPOSE ${APP_PORT}
+
+CMD ["java", "-jar", "app.jar"]
