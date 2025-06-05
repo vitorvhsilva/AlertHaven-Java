@@ -100,3 +100,6 @@ Abaixo estão imagens exemplificando o funcionamento do sistema:
 
 **Clone o repositório**
 git clone https://github.com/vitorvhsilva/AlertHaven-Java.git
+
+**Trocar as credenciais no application properties** 
+As credenciais estão acompanhadas em um arquivo separado da entrega.
