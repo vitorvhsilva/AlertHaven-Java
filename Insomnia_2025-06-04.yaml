@@ -1,0 +1,330 @@
+type: collection.insomnia.rest/5.0
+name: GLOBAL SOLUTION JAVA
+meta:
+  id: wrk_e6ef5958f1e94a12a25453bb04d6c67e
+  created: 1748897098555
+  modified: 1748898428932
+collection:
+  - name: Abrigo
+    meta:
+      id: fld_92f92501bd904c9c91e8b7a902ccaefa
+      created: 1748898575294
+      modified: 1748898575294
+      sortKey: -1748898575294
+    children:
+      - url: localhost:8080/abrigos
+        name: Listar Abrigos
+        meta:
+          id: req_cc3021f7c70d41e4baa2b291a0f7a526
+          created: 1748897098611
+          modified: 1748902614516
+          isPrivate: false
+          sortKey: -1748898582425
+        method: GET
+        body:
+          mimeType: application/json
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/abrigos/6ba7b810-9dad-11d1-80b4-00c04fd430c3
+        name: Obter Abrigo Por Id
+        meta:
+          id: req_35515f1e041544189dc82fba1151dc6b
+          created: 1748898494181
+          modified: 1749084191437
+          isPrivate: false
+          sortKey: -1748898582375
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/abrigos/simples/352cd0c9-d4ca-407e-8c4d-0edce690cc70
+        name: Atualizar Abrigo Simples
+        meta:
+          id: req_e45fc00e7bdd475b884ae5b4cf97570a
+          created: 1748898524335
+          modified: 1749090451814
+          isPrivate: false
+          sortKey: -1748898582275
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeAbrigo": "Abrigo marcos",
+            	"emailAbrigo": "MarcosAbrigo@Gmail.com",
+            	"capacidadeSuportadaAbrigo": 100
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/abrigos/352cd0c9-d4ca-407e-8c4d-0edce690cc70
+        name: Deletar abrigo
+        meta:
+          id: req_a419fd7b23e1453bb41462cd2bf41317
+          created: 1748898545214
+          modified: 1749090472576
+          isPrivate: false
+          sortKey: -1748898582175
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/abrigos
+        name: Cadastrar Abrigo
+        meta:
+          id: req_9f8fdc380b384f1e9ca6c7f095116dd3
+          created: 1748898608226
+          modified: 1749001103656
+          isPrivate: false
+          sortKey: -1748898582525
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+                "nomeAbrigo": "Butãnta",
+                "capacidadeSuportadaAbrigo": 25,
+                "emailAbrigo": "Rodosvaldinho@Gmail.com",
+                "latitude": "-255",
+                "longitude": "129",
+            	  "cep": "09090080",
+                "idsTipoEmergencia": [1, 2]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/abrigos/completo/6ba7b810-9dad-11d1-80b4-00c04fd430c3
+        name: Atualizar Abrigo Completo
+        meta:
+          id: req_6cda6eeac12c4d1a9ccaddf96d32b253
+          created: 1748900322321
+          modified: 1749084213360
+          isPrivate: false
+          sortKey: -1748900322321
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeAbrigo": "Abrigo tranquilo",
+            	"emailAbrigo": "tranquilo@Gmail.com",
+            	"capacidadeSuportadaAbrigo": 100
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Usuario
+    meta:
+      id: fld_49022e2db063416782bcb4084b35cd89
+      created: 1748898602132
+      modified: 1748898627062
+      sortKey: -1748898602132
+    children:
+      - url: localhost:8080/usuarios
+        name: Cadastrar Usuario
+        meta:
+          id: req_b54c6a8cdeb64bd99bad8a217b3b2865
+          created: 1748898453326
+          modified: 1748901549923
+          isPrivate: false
+          sortKey: -1748898617930.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeUsuario": "Joao",
+            	"emailUsuario": "joao@gmail.com",
+            	"senhaUsuario": "1234",
+            	"cpfUsuario": "40142378852",
+            	"telefoneUsuario": "11940301745",
+            	"dia": 10,
+            	"mes": 10,
+            	"ano": 2000
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/usuarios
+        name: Listar Usuarios
+        meta:
+          id: req_01265f311ce14fc1bc48d958c9f556eb
+          created: 1748898627635
+          modified: 1748901533858
+          isPrivate: false
+          sortKey: -1748898627635
+        method: GET
+        body:
+          mimeType: application/json
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/usuarios/10f3b47b-39a6-431d-863b-b1af5600e669
+        name: Obter Usuario Por Id
+        meta:
+          id: req_76d26b0a6e7c4f5d86a11ebf1422bae6
+          created: 1748898636605
+          modified: 1749084141085
+          isPrivate: false
+          sortKey: -1748898636605
+        method: GET
+        body:
+          mimeType: application/json
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/usuarios/61790664-da9b-4adb-86eb-c33731702a13
+        name: Atualizar Usuario
+        meta:
+          id: req_0f7725d4e1944d588693d269902b2de6
+          created: 1748898658291
+          modified: 1749090374505
+          isPrivate: false
+          sortKey: -1748898658291
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeUsuario": "cleber",
+            	"emailUsuario": "cleber@gmail.com",
+            	"senhaUsuario": "12345678",
+            	"cpfUsuario": "11111111111",
+            	"telefoneUsuario": "1111111111",
+            	"dia": 24,
+            	"mes": 11,
+            	"ano": 2005
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/usuarios/61790664-da9b-4adb-86eb-c33731702a13
+        name: Deletar Usuario
+        meta:
+          id: req_25c0827a1720476b8612ed81e0777b73
+          created: 1748898670770
+          modified: 1749090392960
+          isPrivate: false
+          sortKey: -1748898670770
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_d767b579b964addb64c01c03d0acb1925022e306
+    created: 1748897098560
+    modified: 1748897098560
+environments:
+  name: Base Environment
+  meta:
+    id: env_d767b579b964addb64c01c03d0acb1925022e306
+    created: 1748897098557
+    modified: 1748897098557
+    isPrivate: false
