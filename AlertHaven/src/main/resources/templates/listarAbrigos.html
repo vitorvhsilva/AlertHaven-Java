@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Lista de Abrigos</title>
+</head>
+<body>
+<div class="container">
+  <h1>Lista de Abrigos</h1>
+
+  <ul>
+    <!-- Loop para exibir os abrigos cadastrados -->
+    <th:block th:each="abrigo : ${abrigos}">
+      <li>
+        <span th:text="${abrigo.nome}"></span>
+        <div>
+          <!-- Botão para ver a Descrição do abrigo -->
+          <a th:href="@{/descricao/{id}(id=${abrigo.id})}" class="button">Descrição</a>
+          <!-- Botão para Editar o abrigo -->
+          <a th:href="@{/editar/{id}(id=${abrigo.id})}" class="button">Editar</a>
+          <!-- Botão para Excluir o abrigo -->
+          <form th:action="@{/excluir/{id}(id=${abrigo.id})}" method="post" style="display:inline;">
+            <button type="submit" class="button" onclick="return confirm('Tem certeza que deseja excluir este abrigo?');">Excluir</button>
+          </form>
+        </div>
+      </li>
+    </th:block>
+  </ul>
+
+  <!-- Botão para adicionar um novo abrigo -->
+  <a href="/adicionar" class="button">Adicionar abrigo</a>
+</div>
+</body>
+</html>
