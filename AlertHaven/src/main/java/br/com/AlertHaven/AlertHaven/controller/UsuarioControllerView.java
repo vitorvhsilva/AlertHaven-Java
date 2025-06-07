@@ -17,19 +17,19 @@ public class UsuarioControllerView {
     @GetMapping("/usuarios")
     public String listarUsuarios(Model model) {
         model.addAttribute("usuarios", repository.findAll());
-        return "usuarios/listar";
+        return "listarUsuarios";
     }
 
     @GetMapping("/usuarios/adicionar")
     public String formularioUsuario(Model model) {
         model.addAttribute("usuario", new Usuario());
-        return "usuarios/formulario";
+        return "formularioUsuario";
     }
 
     @PostMapping("/usuarios/salvar")
     public String salvarUsuario(@ModelAttribute Usuario usuario) {
         repository.save(usuario);
-        return "redirect:/usuarios";
+        return "redirect:/listarUsuarios";
     }
 
     @GetMapping("/usuarios/editar/{id}")
@@ -37,7 +37,7 @@ public class UsuarioControllerView {
         Usuario usuario = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID Inválido: " + id));
         model.addAttribute("usuario", usuario);
-        return "usuarios/formulario";
+        return "formularioAbrigo";
     }
 
     @GetMapping("/usuarios/excluir/{id}")
@@ -45,6 +45,6 @@ public class UsuarioControllerView {
         Usuario usuario = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID Inválido: " + id));
         repository.delete(usuario);
-        return "redirect:/usuarios";
+        return "redirect:/listarUsuarios";
     }
 }

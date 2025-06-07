@@ -17,19 +17,19 @@ public class AbrigoControllerView {
     @GetMapping("/abrigos")
     public String listarAbrigos(Model model) {
         model.addAttribute("abrigos", repository.findAll());
-        return "abrigos/listar";
+        return "listarAbrigos";
     }
 
     @GetMapping("/abrigos/adicionar")
     public String formularioAbrigo(Model model) {
         model.addAttribute("abrigo", new Abrigo());
-        return "abrigos/formulario";
+        return "formularioAbrigo";
     }
 
     @PostMapping("/abrigos/salvar")
     public String salvarAbrigo(@ModelAttribute Abrigo abrigo) {
         repository.save(abrigo);
-        return "redirect:/abrigos";
+        return "redirect:/listarAbrigos";
     }
 
     @GetMapping("/abrigos/editar/{id}")
@@ -37,7 +37,7 @@ public class AbrigoControllerView {
         Abrigo abrigo = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID Inválido: " + id));
         model.addAttribute("abrigo", abrigo);
-        return "abrigos/formulario";
+        return "formularioAbrigo";
     }
 
     @GetMapping("/abrigos/excluir/{id}")
@@ -45,6 +45,6 @@ public class AbrigoControllerView {
         Abrigo abrigo = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID Inválido: " + id));
         repository.delete(abrigo);
-        return "redirect:/abrigos";
+        return "redirect:/listarAbrigos";
     }
 }
