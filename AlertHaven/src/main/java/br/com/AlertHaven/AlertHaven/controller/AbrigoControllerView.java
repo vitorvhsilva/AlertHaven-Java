@@ -10,11 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/abrigos")
 public class AbrigoControllerView {
 
-    private final AbrigoRepository repository;
-
-    public AbrigoControllerView(AbrigoRepository repository) {
-        this.repository = repository;
-    }
+    private AbrigoRepository repository;
 
     @GetMapping("/listar")
     public String listarAbrigos(Model model) {
