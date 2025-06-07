@@ -5,34 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title th:text="${abrigo.id} ? 'Editar Abrigo' : 'Adicionar Abrigo'"></title>
   <link rel="stylesheet" href="/css/styleAbrigo.css">
+  <link rel="icon" href="data:,"> <!-- Evita erro de favicon -->
 </head>
 <body>
-<div class="container">
-  <header>
-    <h1 th:text="${abrigo.id} ? 'Editar Abrigo' : 'Adicionar Abrigo'"></h1>
-    <a th:href="@{/abrigosview/listar}" class="btn btn-secondary">Voltar</a>
+<div class="abrigo-container">
+  <header class="abrigo-header">
+    <h1 class="abrigo-title" th:text="${abrigo.id} ? 'Editar Abrigo' : 'Adicionar Abrigo'"></h1>
+    <a th:href="@{/abrigosview/listar}" class="btn-abrigo btn-abrigo-secondary">Voltar</a>
   </header>
 
   <main>
-    <form th:action="@{/abrigosview/salvar}" th:object="${abrigo}" method="post">
+    <form class="abrigo-form" th:action="@{/abrigosview/salvar}" th:object="${abrigo}" method="post">
       <input type="hidden" th:field="*{id}">
 
-      <div class="form-group">
+      <div class="form-group-abrigo">
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
+        <input type="text" id="nome" th:field="*{nome}" class="form-control-abrigo" required>
       </div>
 
-      <div class="form-group">
+      <div class="form-group-abrigo">
         <label for="localizacao">Localização:</label>
-        <input type="text" id="localizacao" th:field="*{localizacao}" class="form-control" required>
+        <input type="text" id="localizacao" th:field="*{localizacao}" class="form-control-abrigo" required>
       </div>
 
-      <div class="form-group">
+      <div class="form-group-abrigo">
         <label for="capacidade">Capacidade:</label>
-        <input type="number" id="capacidade" th:field="*{capacidade}" class="form-control" required>
+        <input type="number" id="capacidade" th:field="*{capacidade}" class="form-control-abrigo capacidade-input" required>
       </div>
 
-      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="submit" class="btn-abrigo btn-abrigo-primary">Salvar</button>
     </form>
   </main>
 </div>

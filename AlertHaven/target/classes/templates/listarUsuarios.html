@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/style.css">
-  <title>Lista de Usuarios</title>
+  <title>Lista de Usuários</title>
+  <link rel="stylesheet" href="/css/styleUsuario.css">
 </head>
 <body>
 <div class="container">
-  <h1>Lista de Usuarios</h1>
+  <header>
+    <h1>Lista de Usuários</h1>
+    <a th:href="@{/usuariosview/adicionar}" class="btn btn-primary">Adicionar Usuário</a>
+  </header>
 
-  <ul>
-    <!-- Loop para exibir os usuarios cadastrados -->
-    <th:block th:each="usuario : ${usuarios}">
-      <li>
-        <span th:text="${usuario.nomeUsuario}"></span>
-        <div>
-          <!-- Botão para ver a Descrição do usuario -->
-          <a th:href="@{/descricao/{id}(id=${usuario.id})}" class="button">Descrição</a>
-          <!-- Botão para Editar o usuario -->
-          <a th:href="@{/editar/{id}(id=${usuario.id})}" class="button">Editar</a>
-          <!-- Botão para Excluir o usuario -->
-          <form th:action="@{/excluir/{id}(id=${usuario.id})}" method="post" style="display:inline;">
-            <button type="submit" class="button" onclick="return confirm('Tem certeza que deseja excluir este usuario?');">Excluir</button>
-          </form>
-        </div>
-      </li>
-    </th:block>
-  </ul>
-
-  <!-- Botão para adicionar um novo usuario -->
-  <a href="/adicionar" class="button">Adicionar usuario</a>
+  <main>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Tipo de Usuário</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="usuario : ${usuarios}">
+        <td th:text="${usuario.id}"></td>
+        <td th:text="${usuario.nome}"></td>
+        <td th:text="${usuario.email}"></td>
+        <td th:text="${usuario.tipoUsuario}"></td>
+        <td>
+          <a th:href="@{/usuariosview/editar/{id}(id=${usuario.id})}" class="btn btn-edit">Editar</a>
+          <a th:href="@{/usuariosview/excluir/{id}(id=${usuario.id})}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">Excluir</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </main>
 </div>
 </body>
 </html>

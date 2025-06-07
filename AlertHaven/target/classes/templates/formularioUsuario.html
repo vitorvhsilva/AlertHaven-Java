@@ -1,20 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/style.css">
-  <title>Formulário de Usuário</title>
+  <title th:text="${usuario.id} ? 'Editar Usuário' : 'Adicionar Usuário'"></title>
+  <link rel="stylesheet" href="/css/styleUsuario.css">
 </head>
 <body>
 <div class="container">
-  <h1 th:text="${usuario.id == null} ? 'Adicionar usuario' : 'Editar usuario'"></h1>
-  <form th:action="@{/salvar}" th:object="${usuario}" method="post">
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" th:field="*{nome}" required>
-    <button type="submit">Salvar</button>
-  </form>
-  <a href="/listarUsuarios" class="button">Cancelar</a>
+  <header>
+    <h1 th:text="${usuario.id} ? 'Editar Usuário' : 'Adicionar Usuário'"></h1>
+    <a th:href="@{/usuariosview/listar}" class="btn btn-secondary">Voltar</a>
+  </header>
+
+  <main>
+    <form th:action="@{/usuariosview/salvar}" th:object="${usuario}" method="post">
+      <input type="hidden" th:field="*{id}">
+
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" th:field="*{senha}" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="tipoUsuario">Tipo de Usuário:</label>
+        <select id="tipoUsuario" th:field="*{tipoUsuario}" class="form-control" required>
+          <option value="">Selecione...</option>
+          <option value="ADMIN">Administrador</option>
+          <option value="GERENTE">Gerente</option>
+          <option value="USUARIO">Usuário Comum</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+  </main>
 </div>
 </body>
 </html>

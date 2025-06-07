@@ -39,19 +39,12 @@
     padding: 14px 16px;
     text-align: left;
     font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
 }
 
 .abrigo-table td {
     padding: 14px 16px;
     border-bottom: 1px solid #ebf8ff;
     vertical-align: middle;
-}
-
-.abrigo-table tr {
-    transition: background-color 0.2s;
 }
 
 .abrigo-table tr:nth-child(even) {
@@ -80,7 +73,6 @@
     margin-bottom: 0.6rem;
     font-weight: 500;
     color: #4a5568;
-    font-size: 0.95rem;
 }
 
 .form-control-abrigo {
@@ -90,7 +82,6 @@
     border-radius: 6px;
     font-size: 1rem;
     transition: all 0.3s;
-    background-color: #fff;
 }
 
 .form-control-abrigo:focus {
@@ -147,72 +138,6 @@
     background-color: #e53e3e;
 }
 
-/* Estilo para o campo de capacidade */
 .capacidade-input {
     max-width: 120px;
-}
-
-/* Ícones de status (opcional) */
-.status-icon {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 6px;
-}
-
-.status-disponivel {
-    background-color: #48bb78;
-}
-
-.status-lotado {
-    background-color: #f56565;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .abrigo-container {
-        padding: 1.2rem;
-    }
-
-    .abrigo-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .abrigo-header .btn-abrigo {
-        margin-top: 1rem;
-        width: 100%;
-        text-align: center;
-    }
-
-    .abrigo-table {
-        display: block;
-        overflow-x: auto;
-    }
-
-    .abrigo-form {
-        padding: 1.5rem;
-    }
-}
-
-/* Estilo para cards de abrigo (opcional) */
-.abrigo-card {
-    background: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border-left: 4px solid #3182ce;
-}
-
-.abrigo-card h3 {
-    color: #3182ce;
-    margin-bottom: 0.5rem;
-}
-
-.abrigo-card p {
-    color: #4a5568;
-    margin-bottom: 0.3rem;
-    font-size: 0.9rem;
 }
