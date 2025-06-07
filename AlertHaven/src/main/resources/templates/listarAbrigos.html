@@ -5,36 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Abrigos</title>
   <link rel="stylesheet" href="/css/styleAbrigo.css">
-  <link rel="icon" href="data:,"> <!-- Evita erro de favicon -->
+  <link rel="icon" href="data:,">
 </head>
 <body>
-<div class="abrigo-container">
-  <header class="abrigo-header">
-    <h1 class="abrigo-title">Lista de Abrigos</h1>
-    <a th:href="@{/abrigosview/adicionar}" class="btn-abrigo btn-abrigo-primary">Adicionar Abrigo</a>
+<div class="container">
+  <header>
+    <h1>Lista de Usuários</h1>
+    <a th:href="@{/abrigosview/adicionar}" class="btn btn-primary">Adicionar Abrigo</a>
   </header>
 
   <main>
-    <table class="abrigo-table">
+    <table class="table">
       <thead>
       <tr>
         <th>ID</th>
         <th>Nome</th>
-        <th>Localização</th>
-        <th>Capacidade</th>
-        <th>Ações</th>
+        <th>Email</th>
       </tr>
       </thead>
       <tbody>
       <tr th:each="abrigo : ${abrigos}">
         <td th:text="${abrigo.id}"></td>
         <td th:text="${abrigo.nome}"></td>
-        <td th:text="${abrigo.localizacao}"></td>
-        <td th:text="${abrigo.capacidade}"></td>
+        <td th:text="${abrigo.email}"></td>
         <td>
-          <a th:href="@{/abrigosview/editar/{id}(id=${abrigo.id})}" class="btn-abrigo btn-abrigo-edit">Editar</a>
-          <a th:href="@{/abrigosview/excluir/{id}(id=${abrigo.id})}" class="btn-abrigo btn-abrigo-delete"
-             onclick="return confirm('Tem certeza que deseja excluir este abrigo?')">Excluir</a>
+          <a th:href="@{/abrigosview/editar/{id}(id=${abrigo.id})}" class="btn btn-edit">Editar</a>
+          <a th:href="@{/abrigosview/excluir/{id}(id=${abrigo.id})}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir este abrigo?')">Excluir</a>
         </td>
       </tr>
       </tbody>
