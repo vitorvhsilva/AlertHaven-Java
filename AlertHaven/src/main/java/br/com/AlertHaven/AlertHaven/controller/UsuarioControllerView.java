@@ -29,7 +29,7 @@ public class UsuarioControllerView {
     @PostMapping("/salvar")
     public String salvarUsuario(@ModelAttribute Usuario usuario) {
         repository.save(usuario);
-        return "redirect:/listarUsuarios";
+        return "redirect:/usuariosview/listar";
     }
 
     @GetMapping("/editar/{id}")
@@ -37,7 +37,7 @@ public class UsuarioControllerView {
         Usuario usuario = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID Inválido: " + id));
         model.addAttribute("usuario", usuario);
-        return "formularioAbrigo";
+        return "formularioUsuario";
     }
 
     @GetMapping("/excluir/{id}")

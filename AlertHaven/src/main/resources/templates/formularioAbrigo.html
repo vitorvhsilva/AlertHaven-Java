@@ -1,20 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/style.css">
-  <title>Formulário de Abrigo</title>
+  <title th:text="${abrigo.id} ? 'Editar Abrigo' : 'Adicionar Abrigo'"></title>
+  <link rel="stylesheet" href="/css/styleAbrigo.css">
 </head>
 <body>
 <div class="container">
-  <h1 th:text="${abrigo.id == null} ? 'Adicionar Abrigo' : 'Editar Abrigo'"></h1>
-  <form th:action="@{/salvar}" th:object="${abrigo}" method="post">
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" th:field="*{nome}" required>
-    <button type="submit">Salvar</button>
-  </form>
-  <a href="/listarAbrigos" class="button">Cancelar</a>
+  <header>
+    <h1 th:text="${abrigo.id} ? 'Editar Abrigo' : 'Adicionar Abrigo'"></h1>
+    <a th:href="@{/abrigosview/listar}" class="btn btn-secondary">Voltar</a>
+  </header>
+
+  <main>
+    <form th:action="@{/abrigosview/salvar}" th:object="${abrigo}" method="post">
+      <input type="hidden" th:field="*{id}">
+
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="localizacao">Localização:</label>
+        <input type="text" id="localizacao" th:field="*{localizacao}" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="capacidade">Capacidade:</label>
+        <input type="number" id="capacidade" th:field="*{capacidade}" class="form-control" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+  </main>
 </div>
 </body>
 </html>

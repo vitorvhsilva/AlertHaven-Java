@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/style.css">
   <title>Lista de Abrigos</title>
+  <link rel="stylesheet" href="/css/styleAbrigo.css">
 </head>
 <body>
 <div class="container">
-  <h1>Lista de Abrigos</h1>
+  <header>
+    <h1>Lista de Abrigos</h1>
+    <a th:href="@{/abrigosview/adicionar}" class="btn btn-primary">Adicionar Abrigo</a>
+  </header>
 
-  <ul>
-    <!-- Loop para exibir os abrigos cadastrados -->
-    <th:block th:each="abrigo : ${abrigos}">
-      <li>
-        <span th:text="${abrigo.nomeAbrigo}"></span>
-        <div>
-          <!-- Botão para ver a Descrição do abrigo -->
-          <a th:href="@{/descricao/{id}(id=${abrigo.id})}" class="button">Descrição</a>
-          <!-- Botão para Editar o abrigo -->
-          <a th:href="@{/editar/{id}(id=${abrigo.id})}" class="button">Editar</a>
-          <!-- Botão para Excluir o abrigo -->
-          <form th:action="@{/excluir/{id}(id=${abrigo.id})}" method="post" style="display:inline;">
-            <button type="submit" class="button" onclick="return confirm('Tem certeza que deseja excluir este abrigo?');">Excluir</button>
-          </form>
-        </div>
-      </li>
-    </th:block>
-  </ul>
-
-  <!-- Botão para adicionar um novo abrigo -->
-  <a href="/adicionar" class="button">Adicionar abrigo</a>
+  <main>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Localização</th>
+        <th>Capacidade</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="abrigo : ${abrigos}">
+        <td th:text="${abrigo.id}"></td>
+        <td th:text="${abrigo.nome}"></td>
+        <td th:text="${abrigo.localizacao}"></td>
+        <td th:text="${abrigo.capacidade}"></td>
+        <td>
+          <a th:href="@{/abrigosview/editar/{id}(id=${abrigo.id})}" class="btn btn-edit">Editar</a>
+          <a th:href="@{/abrigosview/excluir/{id}(id=${abrigo.id})}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir este abrigo?')">Excluir</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </main>
 </div>
 </body>
 </html>
