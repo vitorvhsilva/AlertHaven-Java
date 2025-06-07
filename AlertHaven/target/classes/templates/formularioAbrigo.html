@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Formulário de Abrigo</title>
+</head>
+<body>
+<div class="container">
+  <h1 th:text="${abrigo.id == null} ? 'Adicionar Abrigo' : 'Editar Abrigo'"></h1>
+  <form th:action="@{/salvar}" th:object="${abrigo}" method="post">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" th:field="*{nome}" required>
+    <button type="submit">Salvar</button>
+  </form>
+  <a href="/listarAbrigos" class="button">Cancelar</a>
+</div>
+</body>
+</html>

@@ -2,12 +2,14 @@ package br.com.AlertHaven.AlertHaven.controller;
 
 import br.com.AlertHaven.AlertHaven.entity.Usuario;
 import br.com.AlertHaven.AlertHaven.repository.UsuarioRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/usuarios")
+@AllArgsConstructor
+@RequestMapping("/usuariosview")
 public class UsuarioControllerView {
 
     private UsuarioRepository repository;

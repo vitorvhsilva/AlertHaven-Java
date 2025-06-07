@@ -2,12 +2,14 @@ package br.com.AlertHaven.AlertHaven.controller;
 
 import br.com.AlertHaven.AlertHaven.entity.Abrigo;
 import br.com.AlertHaven.AlertHaven.repository.AbrigoRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/abrigos")
+@RequestMapping("/abrigosview")
+@AllArgsConstructor
 public class AbrigoControllerView {
 
     private AbrigoRepository repository;
