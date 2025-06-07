@@ -4,35 +4,33 @@ import br.com.AlertHaven.AlertHaven.entity.Usuario;
 import br.com.AlertHaven.AlertHaven.repository.UsuarioRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/usuarios")
 public class UsuarioControllerView {
 
     private UsuarioRepository repository;
 
-    @GetMapping("/usuarios")
+    @GetMapping("/listar")
     public String listarUsuarios(Model model) {
         model.addAttribute("usuarios", repository.findAll());
         return "listarUsuarios";
     }
 
-    @GetMapping("/usuarios/adicionar")
+    @GetMapping("/adicionar")
     public String formularioUsuario(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "formularioUsuario";
     }
 
-    @PostMapping("/usuarios/salvar")
+    @PostMapping("/salvar")
     public String salvarUsuario(@ModelAttribute Usuario usuario) {
         repository.save(usuario);
         return "redirect:/listarUsuarios";
     }
 
-    @GetMapping("/usuarios/editar/{id}")
+    @GetMapping("/editar/{id}")
     public String editarUsuario(@PathVariable String id, Model model) {
         Usuario usuario = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID Inválido: " + id));
@@ -40,7 +38,7 @@ public class UsuarioControllerView {
         return "formularioAbrigo";
     }
 
-    @GetMapping("/usuarios/excluir/{id}")
+    @GetMapping("/excluir/{id}")
     public String excluirUsuario(@PathVariable String id) {
         Usuario usuario = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("ID Inválido: " + id));
