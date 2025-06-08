@@ -3,39 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title th:text="${abrigo.id} ? 'Editar Abrigo' : 'Adicionar Abrigo'"></title>
-  <link rel="stylesheet" href="/css/styleAbrigo.css">
-  <link rel="icon" href="data:,"> <!-- Evita erro de favicon -->
+  <title>Cadastrar Abrigo</title>
+  <style>
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
-<div class="abrigo-container">
-  <header class="abrigo-header">
-    <h1 class="abrigo-title" th:text="${abrigo.id} ? 'Editar Abrigo' : 'Adicionar Abrigo'"></h1>
-    <a th:href="@{/abrigosview/listar}" class="btn-abrigo btn-abrigo-secondary">Voltar</a>
-  </header>
+<div class="form-container">
+  <h1>Cadastrar Novo Abrigo</h1>
 
-  <main>
-    <form class="abrigo-form" th:action="@{/abrigosview/salvar}" th:object="${abrigo}" method="post">
-      <input type="hidden" th:field="*{id}">
+  <form class="abrigo-form" th:action="@{/abrigosview/salvar}" th:object="${cadastrarAbrigoRequestDTO}" method="post">
 
-      <div class="form-group-abrigo">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" th:field="*{nome}" class="form-control-abrigo" required>
-      </div>
+    <div class="form-group">
+      <label for="nomeAbrigo">Nome do Abrigo:</label>
+      <input type="text" id="nomeAbrigo" th:field="*{nomeAbrigo}" required>
+      <span th:if="${#fields.hasErrors('nomeAbrigo')}" th:errors="*{nomeAbrigo}" class="error"></span>
+    </div>
 
-      <div class="form-group-abrigo">
-        <label for="localizacao">Localização:</label>
-        <input type="text" id="localizacao" th:field="*{localizacao}" class="form-control-abrigo" required>
-      </div>
+    <div class="form-group">
+      <label for="capacidadeSuportadaAbrigo">Capacidade Suportada:</label>
+      <input type="number" id="capacidadeSuportadaAbrigo" th:field="*{capacidadeSuportadaAbrigo}" required>
+      <span th:if="${#fields.hasErrors('capacidadeSuportadaAbrigo')}" th:errors="*{capacidadeSuportadaAbrigo}" class="error"></span>
+    </div>
 
-      <div class="form-group-abrigo">
-        <label for="capacidade">Capacidade:</label>
-        <input type="number" id="capacidade" th:field="*{capacidade}" class="form-control-abrigo capacidade-input" required>
-      </div>
+    <div class="form-group">
+      <label for="emailAbrigo">Email:</label>
+      <input type="email" id="emailAbrigo" th:field="*{emailAbrigo}" required>
+      <span th:if="${#fields.hasErrors('emailAbrigo')}" th:errors="*{emailAbrigo}" class="error"></span>
+    </div>
 
-      <button type="submit" class="btn-abrigo btn-abrigo-primary">Salvar</button>
-    </form>
-  </main>
+    <div class="form-group">
+      <label for="latitude">Latitude:</label>
+      <input type="text" id="latitude" th:field="*{latitude}" required>
+      <span th:if="${#fields.hasErrors('latitude')}" th:errors="*{latitude}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="longitude">Longitude:</label>
+      <input type="text" id="longitude" th:field="*{longitude}" required>
+      <span th:if="${#fields.hasErrors('longitude')}" th:errors="*{longitude}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" th:field="*{cep}" maxlength="8" required>
+      <span th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="idsTipoEmergencia">Tipos de Emergência Atendidos:</label>
+      <select id="idsTipoEmergencia" th:field="*{idsTipoEmergencia}" multiple="multiple" required>
+        <option th:each="tipo : ${tiposEmergencia}"
+                th:value="${tipo.idTipoEmergencia}"
+                th:text="${tipo.tipoEmergencia}">
+        </option>
+      </select>
+      <span th:if="${#fields.hasErrors('idsTipoEmergencia')}" th:errors="*{idsTipoEmergencia}" class="error"></span>
+    </div>
+
+    <button type="submit">Cadastrar Abrigo</button>
+  </form>
 </div>
 </body>
 </html>

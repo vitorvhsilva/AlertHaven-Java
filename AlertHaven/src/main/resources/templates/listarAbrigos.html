@@ -26,8 +26,8 @@
       <tbody>
       <tr th:each="abrigo : ${abrigos}">
         <td th:text="${abrigo.id}"></td>
-        <td th:text="${abrigo.nome}"></td>
-        <td th:text="${abrigo.email}"></td>
+        <td th:text="${abrigo.nomeAbrigo}"></td>
+        <td th:text="${abrigo.emailAbrigo}"></td>
         <td>
           <a th:href="@{/abrigosview/editar/{id}(id=${abrigo.id})}" class="btn btn-edit">Editar</a>
           <a th:href="@{/abrigosview/excluir/{id}(id=${abrigo.id})}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir este abrigo?')">Excluir</a>
