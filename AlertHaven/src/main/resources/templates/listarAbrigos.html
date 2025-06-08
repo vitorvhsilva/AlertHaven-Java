@@ -4,13 +4,139 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Abrigos</title>
-  <link rel="stylesheet" href="/css/styleAbrigo.css">
   <link rel="icon" href="data:,">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    h1 {
+      color: #2c3e50;
+      font-size: 28px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .table th {
+      background-color: #3498db;
+      color: white;
+      padding: 15px;
+      text-align: left;
+    }
+
+    .table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .table tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      margin-right: 5px;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+      border: 1px solid #2980b9;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-edit {
+      background-color: #f39c12;
+      color: white;
+      border: 1px solid #e67e22;
+    }
+
+    .btn-edit:hover {
+      background-color: #e67e22;
+    }
+
+    .btn-delete {
+      background-color: #e74c3c;
+      color: white;
+      border: 1px solid #c0392b;
+    }
+
+    .btn-delete:hover {
+      background-color: #c0392b;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn-primary {
+        margin-top: 10px;
+      }
+
+      .table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    .empty-message {
+      text-align: center;
+      padding: 20px;
+      color: #7f8c8d;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
   <header>
-    <h1>Lista de Usuários</h1>
+    <h1>Lista de Abrigos</h1>
     <a th:href="@{/abrigosview/adicionar}" class="btn btn-primary">Adicionar Abrigo</a>
   </header>
 
@@ -21,6 +147,7 @@
         <th>ID</th>
         <th>Nome</th>
         <th>Email</th>
+        <th>Ações</th>
       </tr>
       </thead>
       <tbody>
@@ -30,8 +157,12 @@
         <td th:text="${abrigo.emailAbrigo}"></td>
         <td>
           <a th:href="@{/abrigosview/editar/{id}(id=${abrigo.id})}" class="btn btn-edit">Editar</a>
-          <a th:href="@{/abrigosview/excluir/{id}(id=${abrigo.id})}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir este abrigo?')">Excluir</a>
+          <a th:href="@{/abrigosview/excluir/{id}(id=${abrigo.id})}" class="btn btn-delete"
+             onclick="return confirm('Tem certeza que deseja excluir este abrigo?')">Excluir</a>
         </td>
+      </tr>
+      <tr th:if="${abrigos.empty}">
+        <td colspan="4" class="empty-message">Nenhum abrigo cadastrado</td>
       </tr>
       </tbody>
     </table>
