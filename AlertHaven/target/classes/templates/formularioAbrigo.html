@@ -84,14 +84,18 @@
     </div>
 
     <div class="form-group">
-      <label for="idsTipoEmergencia">Tipos de Emergência Atendidos:</label>
-      <select id="idsTipoEmergencia" th:field="*{idsTipoEmergencia}" multiple="multiple" required>
-        <option th:each="tipo : ${tiposEmergencia}"
-                th:value="${tipo.idTipoEmergencia}"
-                th:text="${tipo.tipoEmergencia}">
-        </option>
-      </select>
-      <span th:if="${#fields.hasErrors('idsTipoEmergencia')}" th:errors="*{idsTipoEmergencia}" class="error"></span>
+      <label>Tipos de Emergência Atendidos:</label>
+      <div th:each="tipo : ${tiposEmergencia}" class="checkbox-group">
+        <input type="checkbox"
+               th:name="idsTipoEmergencia"
+               th:value="${tipo.idTipoEmergencia}"
+               th:checked="${cadastrarAbrigoRequestDTO.idsTipoEmergencia != null
+                         and #lists.contains(cadastrarAbrigoRequestDTO.idsTipoEmergencia, tipo.idTipoEmergencia)}">
+        <label th:text="${tipo.tipoEmergencia}"></label>
+      </div>
+      <span th:if="${#fields.hasErrors('idsTipoEmergencia')}"
+            th:errors="*{idsTipoEmergencia}"
+            class="error"></span>
     </div>
 
     <button type="submit">Cadastrar Abrigo</button>
