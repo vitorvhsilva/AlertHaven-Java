@@ -24,11 +24,11 @@ public class AtualizarUsuarioRequestDTO {
     private String telefoneUsuario;
 
     @NotNull(message = "O dia de nascimento do usuário não pode ficar em branco")
-    private int dia;
+    private Integer dia;
 
     @NotNull(message = "O mes de nascimento do usuário não pode ficar em branco")
-    private int mes;
+    private Integer mes;
 
     @NotNull(message = "O ano de nascimento do usuário não pode ficar em branco")
-    private int ano;
+    private Integer ano;
 }

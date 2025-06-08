@@ -3,49 +3,191 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title th:text="${usuario.id} ? 'Editar Usuário' : 'Adicionar Usuário'"></title>
-  <link rel="stylesheet" href="/css/styleUsuario.css">]
+  <title>Adicionar Usuário</title>
   <link rel="icon" href="data:,">
+  <style>
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background-color: white;
+      border-radius: 8px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    h1 {
+      color: #2c3e50;
+      font-size: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .error {
+      color: #e74c3c;
+      font-size: 14px;
+      margin-top: 5px;
+      display: block;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-secondary {
+      background-color: #95a5a6;
+      color: white;
+      border: none;
+    }
+
+    .btn-secondary:hover {
+      background-color: #7f8c8d;
+    }
+
+    .date-fields {
+      display: flex;
+      gap: 10px;
+    }
+
+    .date-fields .form-group {
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      .date-fields {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
+<div class="form-container">
   <header>
-    <h1 th:text="${usuario.id} ? 'Editar Usuário' : 'Adicionar Usuário'"></h1>
+    <h1>Adicionar Usuário</h1>
     <a th:href="@{/usuariosview/listar}" class="btn btn-secondary">Voltar</a>
   </header>
 
-  <main>
-    <form th:action="@{/usuariosview/salvar}" th:object="${usuario}" method="post">
-      <input type="hidden" th:field="*{id}">
+  <form th:action="@{/usuariosview/salvar}"
+        th:object="${usuario}"
+        method="post">
 
+    <div class="form-group">
+      <label for="nomeUsuario">Nome:</label>
+      <input type="text" id="nomeUsuario" th:field="*{nomeUsuario}" required>
+      <span th:if="${#fields.hasErrors('nomeUsuario')}" th:errors="*{nomeUsuario}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="emailUsuario">Email:</label>
+      <input type="email" id="emailUsuario" th:field="*{emailUsuario}" required>
+      <span th:if="${#fields.hasErrors('emailUsuario')}" th:errors="*{emailUsuario}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="senhaUsuario">Senha:</label>
+      <input type="password" id="senhaUsuario" th:field="*{senhaUsuario}" required>
+      <span th:if="${#fields.hasErrors('senhaUsuario')}" th:errors="*{senhaUsuario}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="cpfUsuario">CPF:</label>
+      <input type="text" id="cpfUsuario" th:field="*{cpfUsuario}" maxlength="11" required>
+      <span th:if="${#fields.hasErrors('cpfUsuario')}" th:errors="*{cpfUsuario}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="telefoneUsuario">Telefone:</label>
+      <input type="text" id="telefoneUsuario" th:field="*{telefoneUsuario}" required>
+      <span th:if="${#fields.hasErrors('telefoneUsuario')}" th:errors="*{telefoneUsuario}" class="error"></span>
+    </div>
+
+    <div class="date-fields">
       <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
+        <label for="dia">Dia Nascimento:</label>
+        <input type="number" id="dia" th:field="*{dia}" min="1" max="31" required>
+        <span th:if="${#fields.hasErrors('dia')}" th:errors="*{dia}" class="error"></span>
       </div>
 
       <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" th:field="*{email}" class="form-control" required>
+        <label for="mes">Mês Nascimento:</label>
+        <input type="number" id="mes" th:field="*{mes}" min="1" max="12" required>
+        <span th:if="${#fields.hasErrors('mes')}" th:errors="*{mes}" class="error"></span>
       </div>
 
       <div class="form-group">
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" th:field="*{senha}" class="form-control" required>
+        <label for="ano">Ano Nascimento:</label>
+        <input type="number" id="ano" th:field="*{ano}" min="1900" th:max="${T(java.time.LocalDate).now().year}" required>
+        <span th:if="${#fields.hasErrors('ano')}" th:errors="*{ano}" class="error"></span>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="tipoUsuario">Tipo de Usuário:</label>
-        <select id="tipoUsuario" th:field="*{tipoUsuario}" class="form-control" required>
-          <option value="">Selecione...</option>
-          <option value="ADMIN">Administrador</option>
-          <option value="GERENTE">Gerente</option>
-          <option value="USUARIO">Usuário Comum</option>
-        </select>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Salvar</button>
-    </form>
-  </main>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Cadastrar Usuário</button>
+    </div>
+  </form>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const cpfField = document.getElementById('cpfUsuario');
+    if (cpfField) {
+      cpfField.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        e.target.value = value;
+      });
+    }
+
+    const telField = document.getElementById('telefoneUsuario');
+    if (telField) {
+      telField.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        e.target.value = value;
+      });
+    }
+  });
+</script>
 </body>
 </html>

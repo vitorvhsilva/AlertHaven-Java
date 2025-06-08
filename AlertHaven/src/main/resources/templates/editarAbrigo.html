@@ -55,12 +55,10 @@
 <div class="form-container">
     <h1>Editar Abrigo</h1>
 
-    <!-- Alterado para usar o objeto 'abrigo' ao invés de 'cadastrarAbrigoRequestDTO' -->
     <form th:action="@{/abrigosview/atualizar/{id}(id=${abrigo.id})}"
           th:object="${abrigo}"
           method="post">
 
-        <!-- Campo oculto para o ID -->
         <input type="hidden" th:field="*{id}">
 
         <div class="form-group">
