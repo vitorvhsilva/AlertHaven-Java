@@ -47,8 +47,7 @@ O sistema oferece operações REST para o gerenciamento de **usuários** e **abr
 ---
 
 ## 🚀 Configuração e Execução
-1. Configuração do Banco de Dados
-Edite o arquivo src/main/resources/application.properties com suas credenciais:
+1. Edite o arquivo src/main/resources/application.properties com suas credenciais:
 ```bash
 spring.datasource.url=jdbc:oracle:thin:@//[HOST]:[PORT]/[SERVICE_NAME]
 spring.datasource.username=[SEU_USUARIO]
