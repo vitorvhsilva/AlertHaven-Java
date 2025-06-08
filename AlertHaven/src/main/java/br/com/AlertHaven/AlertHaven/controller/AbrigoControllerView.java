@@ -1,5 +1,6 @@
 package br.com.AlertHaven.AlertHaven.controller;
 
+import br.com.AlertHaven.AlertHaven.dto.request.AtualizarAbrigoRequestDTO;
 import br.com.AlertHaven.AlertHaven.dto.request.CadastrarAbrigoRequestDTO;
 import br.com.AlertHaven.AlertHaven.entity.Abrigo;
 import br.com.AlertHaven.AlertHaven.repository.AbrigoRepository;
@@ -51,15 +52,26 @@ public class AbrigoControllerView {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarAbrigo(@PathVariable String id, Model model) {
+    public String mostrarFormularioEdicao(@PathVariable String id, Model model) {
         Abrigo abrigo = abrigoService.obterAbrigoPorId(id);
         model.addAttribute("abrigo", abrigo);
-        return "formularioAbrigo";
+        return "editarAbrigo";
+    }
+
+    @PostMapping("/atualizar/{id}")
+    public String atualizarAbrigo(@PathVariable String id,
+                                  @Valid @ModelAttribute("cadastrarAbrigoRequestDTO") AtualizarAbrigoRequestDTO dto,
+                                  BindingResult result) {
+        if (result.hasErrors()) {
+            return "editarAbrigo";
+        }
+        abrigoService.atualizarAbrigo(id, dto);
+        return "redirect:/abrigosview/listar";
     }
 
     @GetMapping("/excluir/{id}")
     public String excluirAbrigo(@PathVariable String id) {
         abrigoService.deletarAbrigoPorId(id);
-        return "redirect:/listarAbrigos";
+        return "redirect:/abrigosview/listar";
     }
 }
